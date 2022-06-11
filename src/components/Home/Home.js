@@ -8,6 +8,11 @@ import {
   BottomNavigation,
   TextField,
   Button,
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  Box
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -19,11 +24,11 @@ import {
   getPostsByUser,
 } from '../../actions/posts';
 import Pagination from '../Pagination.jsx';
-import Posts from '../Posts/Posts';
+import Posts from '../Posts/Posts'; 
 // import Map from '../Map/Map';
 import ChipInput from 'material-ui-chip-input';
 import Form from '../Form/Form';
-import ModalUnstyledDemo from '../Landing/Modal';
+//import ModalUnstyledDemo from '../Landing/Modal';
 import useStyles from './styles';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 

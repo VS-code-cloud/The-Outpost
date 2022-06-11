@@ -6,10 +6,16 @@ import {
   Avatar,
   Button,
   TextField,
-  TextEditingController,
-  InputBase,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl, 
+  OutlinedInput,
+  Box,
+  Chip
 } from '@material-ui/core';
-import { Select, MenuText, MenuItem } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -29,24 +35,49 @@ import useStyles from './styles';
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
-const Navbar = () => {
+const Navbar = ({isLoggedIn, communities}) => {
+
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-
+  console.log('isloggedin', isLoggedIn)
   const classes = useStyles();
 
   const [currentId, setCurrentId] = useState(0);
-
+  console.log('communities', communities)
   const query = useQuery();
-
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
   const page = query.get('page') || 1;
   const searchQuery = query.get('searchQuery');
-
+  const theme = useTheme();
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
-  const [selected,setSelected] = useState([]); 
+  var [communityNames, setCommunityNames] = React.useState([]);
+  console.log('communities', communities)
+  if (!communities?.includes("Global") && communityNames.length===0) {
+    setCommunityNames([...communityNames, "Communities:"])
+    communities?.push("Global")
+  }
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    communityNames = communityNames?.filter(e => e !== "Communities");
+    communityNames = value;
+    setCommunityNames();
+    setCommunityNames(communityNames);
+      // On autofill we get a stringified value.
+  };
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
 
@@ -88,13 +119,6 @@ const Navbar = () => {
       history.push('/');
     }
   };
-  // const searchByUser = () => {
-  //   const user = JSON.parse(localStorage.getItem('profile'));
-  //   if (user) dispatch(getPostsByUser(user.result._id));
-  //   history.push(`/posts/user/`);
-  //   console.log(user);
-  // };
-
   const handleKeyPress = (e) => {
     console.log(e.key);
     if (e.key === 'Enter') {
@@ -103,7 +127,6 @@ const Navbar = () => {
     }
   };
   const handleAddChip = (tag) => setTags([...tags, tag]);
-
   const handleDeleteChip = (chipToDelete) =>
     setTags(tags.filter((tag) => tag !== chipToDelete));
 
@@ -136,13 +159,35 @@ const Navbar = () => {
           },
         }}
       />
-      <br />
-      <div className={classes.Navbar}><h6>Test</h6><Select multiple={true} value={selected ?? "Communities"} onChange={(event) => setSelected(event.target.value)}>
-        <MenuItem>Val - 1</MenuItem>
-        <MenuItem>Val - 2</MenuItem>
-        <MenuItem>Val - 3</MenuItem>
-        <MenuItem>Val - 4</MenuItem>
-      </Select></div> 
+      <div>
+        <FormControl sx={{ m: 1, width: 300 }}>
+          <Select
+            labelId="demo-multiple-chip-label"
+            id="demo-multiple-chip"
+            multiple
+            value={communityNames}
+            onChange={handleChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {selected?.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </Box>
+            )}
+            MenuProps={MenuProps}
+          >
+            {communities?.map((community) => (
+              <MenuItem
+                key={community}
+                value={community}
+              >
+                {community}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
       <ChipInput
         name='search'
         style={{ margin: '5px 5px 5px 5px' }}
@@ -171,7 +216,6 @@ const Navbar = () => {
           },
         }}
       />
-      
       <Button
         onClick={searchPost}
         className={classes.searchButton}
@@ -180,7 +224,6 @@ const Navbar = () => {
       >
         Search
       </Button>
-
       <Toolbar className={classes.toolbar}>
         {user?.result ? (
           <>

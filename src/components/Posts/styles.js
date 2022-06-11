@@ -18,4 +18,17 @@ export default makeStyles((theme) => ({
     textAlign: 'center',
     fontFamily: 'Montserrat',
   },
+  Button: {
+    backgroundColor: 'white',
+    marginLeft: '10px',
+    marginRight: '10px',
+
+    fontFamily: 'Montserrat',
+    color: 'black',
+    fontSize: '10px',
+    display: 'flex',
+
+    width: '75px',
+    fontWeight: '900',
+  },
 }));
