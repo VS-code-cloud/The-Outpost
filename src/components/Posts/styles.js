@@ -21,14 +21,14 @@ export default makeStyles((theme) => ({
   Button: {
     backgroundColor: 'white',
     marginLeft: '10px',
-    marginRight: '10px',
+    marginRight: '0px',
 
     fontFamily: 'Montserrat',
     color: 'black',
-    fontSize: '10px',
-    display: 'flex',
+    fontSize: '14px',
 
     width: '75px',
     fontWeight: '900',
+    borderRadius: '7px',
   },
 }));

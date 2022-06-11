@@ -39,7 +39,7 @@ const Posts = ({ setCurrentId, showModal }) => {
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Create a Community</h4>
       </div>
-      <div class="modal-body">
+      <div class={classes.Button}>
         <input placeholder="Community Name"/>
       </div>
       <div class="modal-footer">
@@ -52,9 +52,9 @@ const Posts = ({ setCurrentId, showModal }) => {
  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class={classes.Button} id="myModalLabel">Join a Community</h4>
+        <h4 class="modal-title" id="myModalLabel">Join a Community</h4>
       </div>
-      <div class="modal-body">
+      <div class={classes.Button}>
         <input placeholder="Community Code"/>
       </div>
       <div class="modal-footer">
