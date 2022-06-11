@@ -6,15 +6,16 @@ import {
   Avatar,
   Button,
   TextField,
+  TextEditingController,
   InputBase,
 } from '@material-ui/core';
+import { Select, MenuText, MenuItem } from '@material-ui/core';
+
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import ChipInput from 'material-ui-chip-input';
 import Form from '../Form/Form';
-import silkroadText from '../../images/silkroadLogo.png';
-import silkroadLogo from '../../images/imgLogo.png';
 // import { Autocomplete } from '@react-google-maps/api';
 import {
   getPosts,
@@ -45,7 +46,7 @@ const Navbar = () => {
 
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
-
+  const [selected,setSelected] = useState([]); 
   const logout = () => {
     dispatch({ type: actionType.LOGOUT });
 
@@ -109,22 +110,8 @@ const Navbar = () => {
   return (
     <AppBar className={classes.appBar} position='sticky' color='inherit'>
       <Link to='/' className={classes.brandContainer}>
-        <img
-          className={classes.text}
-          component={Link}
-          to='/'
-          src={silkroadText}
-          alt='icon'
-          height='40px'
-        />
-        <img
-          className={classes.image}
-          component={Link}
-          to='/'
-          src={silkroadLogo}
-          alt='icon'
-          height='40px'
-        />
+      <p>The</p>
+      <h2>Outpost</h2>
       </Link>
       <TextField
         name='search'
@@ -150,7 +137,12 @@ const Navbar = () => {
         }}
       />
       <br />
-
+      <div className={classes.Navbar}><h6>Test</h6><Select multiple={true} value={selected ?? "Communities"} onChange={(event) => setSelected(event.target.value)}>
+        <MenuItem>Val - 1</MenuItem>
+        <MenuItem>Val - 2</MenuItem>
+        <MenuItem>Val - 3</MenuItem>
+        <MenuItem>Val - 4</MenuItem>
+      </Select></div> 
       <ChipInput
         name='search'
         style={{ margin: '5px 5px 5px 5px' }}
@@ -179,7 +171,7 @@ const Navbar = () => {
           },
         }}
       />
-
+      
       <Button
         onClick={searchPost}
         className={classes.searchButton}

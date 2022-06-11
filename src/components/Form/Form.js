@@ -21,6 +21,7 @@ import { createPost, updatePost } from '../../actions/posts';
 import places from 'places.js';
 import UploadIcon from './UploadIcon';
 import useStyles from './styles';
+import { FileUploadIcon } from 'stream-chat-react';
 
 const config = {
   addId: process.env.REACT_APP_ALOGLIA_APP_ID,
@@ -225,7 +226,7 @@ const Form = ({ showModal, currentId, setCurrentId }) => {
                 onDone={({ base64 }) =>
                   setPostData({ ...postData, selectedFile: base64 })
                 }
-                label={UploadIcon}
+                label={FileUploadIcon}
               />
             </div>
 

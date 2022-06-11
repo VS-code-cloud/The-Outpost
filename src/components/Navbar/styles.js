@@ -82,7 +82,13 @@ export default makeStyles((theme) => ({
   },
   brandContainer: {
     display: 'flex',
-    marginLeft: '0px',
+    marginLeft: '12px',
+    marginRight: '12px',
+    color: 'white',
+    fontFamily: 'Montserrat',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    
   },
   brand: {
     display: 'flex',
@@ -90,6 +96,7 @@ export default makeStyles((theme) => ({
     marginLeft: '0px',
     marginTop: '5px',
     justifyContent: 'flex-start',
+    //color: 'white',
   },
   paper: {
     blackgroundColor: 'transparent',

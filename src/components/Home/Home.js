@@ -23,7 +23,7 @@ import Posts from '../Posts/Posts';
 // import Map from '../Map/Map';
 import ChipInput from 'material-ui-chip-input';
 import Form from '../Form/Form';
-import ModalUnstyledDemo from '../Modal/Modal';
+import ModalUnstyledDemo from '../Landing/Modal';
 import useStyles from './styles';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 

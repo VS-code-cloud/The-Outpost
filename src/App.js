@@ -61,16 +61,15 @@
 //   );
 // };
 
-// export default App;
+// export default App;s
 import React from 'react';
 import { Container } from '@material-ui/core';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-
+import LandingHome from './components/Landing/Home';
+import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import PostDetails from './components/PostDetails/PostDetails';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
-// import Profile from './components/Profile/Profile';
 import createHistory from 'history/createBrowserHistory';
 
 const App = () => {
@@ -82,7 +81,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path='/' exact component={() => <Redirect to='/posts' />} />
-          <Route path='/posts' exact component={Home} />
+          {user ? (<Route path='/posts' exact component={Home} />) : (null)}
 
           <Route path='/posts/search' exact component={Home} />
           <Route path='/posts/:id' exact component={PostDetails} />
@@ -97,7 +96,7 @@ const App = () => {
           {/*<Route path={`/profile/${user.results._id}`}>
             <Profile />
           </Route>*/}
-        </Switch>
+       </Switch> 
       </Container>
     </BrowserRouter>
   );
