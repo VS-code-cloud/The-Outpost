@@ -61,31 +61,33 @@
 //   );
 // };
 
-// export default App;s
+// export default Apps;
 import React from 'react';
 import { Container } from '@material-ui/core';
-import LandingHome from './components/Landing/Home';
 import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import PostDetails from './components/PostDetails/PostDetails';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
 import createHistory from 'history/createBrowserHistory';
+import './components/Landing/styles.css';
+import Landing from './components/Landing/Appy';
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const history = createHistory();
+  console.log('user', user)
   return (
     <BrowserRouter history={history}>
       <Container maxWidth='xl'>
-        <Navbar />
+        <Navbar isLoggedIn = {user ? true : false} communities = {user?.result?.communities}/>
         <Switch>
-          <Route path='/' exact component={() => <Redirect to='/posts' />} />
-          {user ? (<Route path='/posts' exact component={Home} />) : (null)}
-
+          <Route path='/' exact component={<Landing/>} />
+          {user ? console.log('logging because user') : console.log("no user")}
+          <Route path='/posts' exact component={() => (!user ? <Redirect to='/' /> : <Home/>)} />
           <Route path='/posts/search' exact component={Home} />
           <Route path='/posts/:id' exact component={PostDetails} />
-           <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/posts" />)} />
+           <Route path="/auth" exact component={() => (!user ? <Auth /> : <Redirect to="/" />)} />
            <Route
              path='/auth'
              exact

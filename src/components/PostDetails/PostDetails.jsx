@@ -114,7 +114,6 @@ const Post = () => {
             className={classes.alsoLike}
             gutterBottom
             variant='h5'
-            className={classes.nameLabel}
           >
             You might also like:
           </Typography>
